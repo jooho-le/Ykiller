@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YKiller — 유튜브 댓글 광고·스팸 탐지 대시보드</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./assets/styles.css" />
+  </head>
+  <body>
+    <div id="app" class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <img src="./assets/logo.svg" alt="YKiller" class="brand__logo" />
+          <div class="brand__title">YKiller</div>
+        </div>
+        <nav class="nav">
+          <a href="#/dashboard" class="nav__item" data-route="dashboard">대시보드</a>
+          <a href="#/comments" class="nav__item" data-route="comments">댓글 관리</a>
+          <a href="#/analytics" class="nav__item" data-route="analytics">분석</a>
+          <a href="#/settings" class="nav__item" data-route="settings">설정</a>
+        </nav>
+        <div class="sidebar__footer">
+          <button id="simulateBtn" class="btn btn--outline">데이터 시뮬레이션</button>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div class="search">
+            <input id="searchInput" class="input" placeholder="댓글/작성자/영상 검색" />
+          </div>
+          <div class="actions">
+            <div class="policy">
+              <label class="label">자동조치 임계값</label>
+              <div class="policy__controls">
+                <div class="policy__group">
+                  <span class="badge">숨김 ≥</span>
+                  <input id="thHide" type="range" min="0" max="1" step="0.01" />
+                  <span id="thHideVal" class="badge badge--ghost">0.90</span>
+                </div>
+                <div class="policy__group">
+                  <span class="badge">검토 ≥</span>
+                  <input id="thReview" type="range" min="0" max="1" step="0.01" />
+                  <span id="thReviewVal" class="badge badge--ghost">0.70</span>
+                </div>
+                <button id="savePolicyBtn" class="btn btn--primary">저장</button>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <section id="view" class="view"></section>
+      </main>
+    </div>
+
+    <script src="./js/state.js"></script>
+    <script src="./js/api.js"></script>
+    <script src="./js/router.js"></script>
+    <script src="./js/views/dashboard.js"></script>
+    <script src="./js/views/comments.js"></script>
+    <script src="./js/views/analytics.js"></script>
+    <script src="./js/views/settings.js"></script>
+    <script src="./app.js"></script>
+  </body>
+  </html>
+
