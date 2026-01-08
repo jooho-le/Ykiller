@@ -4,7 +4,9 @@ const config: Config = {
   darkMode: ["class"],
   content: [
     "./app/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}"
+    "./components/**/*.{ts,tsx}",
+    "./lib/**/*.{ts,tsx}",
+    "./store/**/*.{ts,tsx}"
   ],
   theme: {
     extend: {
@@ -36,8 +38,8 @@ const config: Config = {
         card: "0 20px 50px rgba(0, 0, 0, 0.35)"
       },
       fontFamily: {
-        sans: ["Pretendard", "system-ui", "-apple-system", "Segoe UI", "Noto Sans KR", "sans-serif"],
-        display: ["Space Grotesk", "Pretendard", "system-ui", "sans-serif"]
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "system-ui", "sans-serif"]
       }
     }
   },

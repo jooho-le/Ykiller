@@ -1,61 +1,73 @@
-export type LabelType = "AD" | "SPAM" | "SUS" | "OK"
-export type ActionType = "숨김" | "검토" | "허용"
+export type RiskLevel = "SAFE" | "WARN" | "RISK"
+export type CommentFlag = "AD" | "SPAM" | "SUS" | "OK"
 export type BadgeTone = "ad" | "spam" | "sus" | "ok" | "neutral"
+export type ReportMode = "viewer" | "creator"
 
-export type StatCard = {
+export type SummaryMetric = {
   id: string
   label: string
   value: number
-  change: string
+  unit?: string
 }
 
-export type DistributionItem = {
-  label: LabelType
+export type ReportSummary = {
+  totalComments: number
+  spamCount: number
+  adCount: number
+  linkCount: number
+  contactCount: number
+}
+
+export type ClassDistributionItem = {
+  label: CommentFlag
   value: number
 }
 
-export type FeedbackItem = {
-  id: string
-  label: LabelType
-  time: string
+export type TimeSeriesItem = {
+  hour: string
+  count: number
 }
 
-export type DetectionExample = {
-  id: string
-  text: string
-  score: number
-  label: LabelType
-}
-
-export type CommentItem = {
+export type SuspiciousComment = {
   id: string
   author: string
-  text: string
-  video: string
-  time: string
-  label: LabelType
+  content: string
+  reason: CommentFlag
   score: number
+  action: "허용" | "숨김" | "검토"
+  hasLink: boolean
+  hasContact: boolean
+  createdAt: string
 }
 
-export type Policy = {
-  hideThreshold: number
-  reviewThreshold: number
+export type PatternSummary = {
+  domains: string[]
+  keywords: string[]
 }
 
-export type AnalysisReport = {
+export type ReportResult = {
+  jobId: string
   videoTitle: string
-  channel: string
-  summary: string
-  highlights: string[]
-  counts: Record<LabelType, number>
+  videoUrl: string
+  channelName: string
+  analyzedAt: string
+  mode: ReportMode
+  riskLevel: RiskLevel
+  summary: ReportSummary
+  classDistribution: ClassDistributionItem[]
+  timeSeries: TimeSeriesItem[]
+  suspicious: SuspiciousComment[]
+  patterns: PatternSummary
 }
 
-export type MockData = {
-  stats: StatCard[]
-  distribution: DistributionItem[]
-  feedback: FeedbackItem[]
-  examples: DetectionExample[]
-  comments: CommentItem[]
-  systemIntro: string[]
-  analysisReport: AnalysisReport
+export type ReportHistoryEntry = {
+  jobId: string
+  videoTitle: string
+  riskLevel: RiskLevel
+  analyzedAt: string
+}
+
+export type ReportSettings = {
+  maxComments: number
+  includeReplies: boolean
 }

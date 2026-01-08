@@ -1,34 +1,37 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
-import type { ActionType, BadgeTone, LabelType, Policy } from "@/lib/types"
+import type { CommentFlag, RiskLevel, BadgeTone, ReportMode } from "@/lib/types"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export const labelToneMap: Record<LabelType, BadgeTone> = {
+export const riskToneMap: Record<RiskLevel, BadgeTone> = {
+  SAFE: "ok",
+  WARN: "sus",
+  RISK: "ad"
+}
+
+export const flagToneMap: Record<CommentFlag, BadgeTone> = {
   AD: "ad",
   SPAM: "spam",
   SUS: "sus",
   OK: "ok"
 }
 
-export const actionToneMap: Record<ActionType, BadgeTone> = {
-  숨김: "ad",
-  검토: "sus",
-  허용: "ok"
+export const modeLabelMap: Record<ReportMode, string> = {
+  viewer: "시청자",
+  creator: "크리에이터"
 }
 
-export function getActionFromScore(score: number, policy: Policy): ActionType {
-  if (score >= policy.hideThreshold) {
-    return "숨김"
-  }
-  if (score >= policy.reviewThreshold) {
-    return "검토"
-  }
-  return "허용"
+export function formatNumber(value: number) {
+  return new Intl.NumberFormat("ko-KR").format(value)
 }
 
-export function formatScore(score: number) {
-  return score.toFixed(2)
+export function formatScore(value: number) {
+  return value.toFixed(1)
+}
+
+export function clamp(value: number, min: number, max: number) {
+  return Math.min(Math.max(value, min), max)
 }
